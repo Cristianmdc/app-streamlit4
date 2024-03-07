@@ -1,21 +1,32 @@
 import streamlit as st
-import joblib
+import pickle
+from nltk.stem import WordNetLemmatizer
+import re
 
-# Load the model
-model = joblib.load('text_clf_model.joblib')
+# Load the model from disk
+loaded_model = pickle.load(open('finalized_model.pkl', 'rb'))
 
-# Function to predict text and get score
-def predict_text_with_score(model, text):
-    prediction = model.predict([text])
-    prediction_proba = model.predict_proba([text])
-    class_labels = model.classes_
-    proba_scores = {class_labels[i]: prediction_proba[0][i] for i in range(len(class_labels))}
-    return prediction[0], proba_scores
+# Initialize the lemmatizer
+lemmatizer = WordNetLemmatizer()
 
-# Streamlit user interface
-st.title('Text Classification App')
-user_input = st.text_area("Enter text here:")
-if st.button('Predict'):
-    prediction, scores = predict_text_with_score(model, user_input)
-    st.write("Predicted class:", prediction)
-    st.write("Probability Scores:", scores)
+def clean_and_lemmatize(text):
+    words = re.sub(r"[^a-zA-Z]", " ", text).split()
+    return ' '.join([lemmatizer.lemmatize(word.lower()) for word in words])
+
+def predict_sentiment(input_text):
+    cleaned_text = clean_and_lemmatize(input_text)
+    prediction = loaded_model.predict([cleaned_text])
+    return prediction[0]
+
+# Set up the Streamlit interface
+st.title('Sentiment Analysis Model')
+user_input = st.text_area("Enter Text", "Type Here...")
+if st.button('Predict Sentiment'):
+    result = predict_sentiment(user_input)
+    if result == 1:
+        st.success('The sentiment is positive!')
+    else:
+        st.error('The sentiment is negative or neutral.')
+
+# To run the app, use the following command:
+# streamlit run app.py
