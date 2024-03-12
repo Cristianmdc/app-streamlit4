@@ -10,6 +10,7 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 import zipfile
 import os
+import pickle
 #load the model 
 with open('finalized_model.pkl', 'rd') as file:
     model = pickle.load(file)
