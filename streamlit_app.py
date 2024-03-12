@@ -1,9 +1,11 @@
 import streamlit as st
 import pickle
 #load the model 
-with open('finalized_model.pkl', 'rd') as file:
-    model = pickle.load(file)
+import pickle
 
+with open('nlp.pkl','rb') as file:
+  pickle.load(model, file)
+    
 # Streamlit app starts here
 st.title('Email Spam Classification')
 input_text = st.text_area("Enter the email text to classify as spam or not spam:", "Type Here...")
