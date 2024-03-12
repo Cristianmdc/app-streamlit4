@@ -1,23 +1,26 @@
 import streamlit as st
 import pickle
-#load the model 
-import pickle
+from your_script_name import preprocess_and_predict  # Ensure to replace 'your_script_name' with the actual name of your script file
 
-with open('nlp.pkl','rb') as file:
-  model = pickle.load(file)
-    
-# Streamlit app starts here
-st.title('Email Spam Classification')
-input_text = st.text_area("Enter the email text to classify as spam or not spam:", "Type Here...")
+# Load your trained model
+@st.cache(allow_output_mutation=True)
+def load_model():
+    with open('nlp.pkl', 'rb') as file:
+        model = pickle.load(file)
+    return model
 
-if st.button('Classify'):
-    # Preprocess and predict
-    predicted_class = preprocess_and_predict(input_text, model)
-    if predicted_class == 1:
-        st.success('The email is classified as Spam.')
+model = load_model()
+
+# Setting title
+st.title("Spam/Ham Classification App")
+
+# Getting user input
+user_input = st.text_area("Enter the text you want to classify:", "Type Here")
+
+if st.button("Classify"):
+    # Preprocess and predict the class of user input
+    result = preprocess_and_predict(user_input, model)  # Adjust this if your preprocess_and_predict function doesn't use the model as input
+    if result == 1:
+        st.write("The text is classified as: Spam")
     else:
-        st.success('The email is classified as Not Spam.')
-
-# Note on running the app:
-# Ensure you have streamlit installed and run the app using the command:
-# streamlit run streamlit_app.py
+        st.write("The text is classified as: Not Spam")
