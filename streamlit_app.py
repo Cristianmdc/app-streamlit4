@@ -1,6 +1,6 @@
 import streamlit as st
 import pickle
-from your_script_name import preprocess_and_predict  # Ensure to replace 'your_script_name' with the actual name of your script file
+from nlp.pkl import preprocess_and_predict  # Ensure to replace 'your_script_name' with the actual name of your script file
 
 # Load your trained model
 @st.cache(allow_output_mutation=True)
