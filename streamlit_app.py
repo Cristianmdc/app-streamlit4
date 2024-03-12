@@ -11,7 +11,7 @@ from nltk.stem import WordNetLemmatizer
 import zipfile
 import os
 #load the model 
-with open('finalized_model.pkl', 'rd') as file
+with open('finalized_model.pkl', 'rd') as file:
     model = pickle.load(file)
 
 # Streamlit app starts here
