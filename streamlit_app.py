@@ -1,6 +1,5 @@
 import streamlit as st
 import pickle
-  
 
 # Load your trained model
 @st.cache(allow_output_mutation=True)
@@ -14,12 +13,14 @@ model = load_model()
 # Setting title
 st.title("Spam/Ham Classification App")
 
+# Define or import your clean_and_lemmatize function here as well
+
 # Getting user input
 user_input = st.text_area("Enter the text you want to classify:", "Type Here")
 
 if st.button("Classify"):
-    # Predict the class of user input
-    result = preprocess_and_predict(user_input, model)  # Adjust according to your function's definition
+    # Ensure the preprocess_and_predict function is defined or imported correctly
+    result = preprocess_and_predict(user_input, model)
     if result == 1:
         st.write("The text is classified as: Spam")
     else:
