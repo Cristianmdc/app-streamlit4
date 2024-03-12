@@ -12,7 +12,7 @@ import zipfile
 import os
 #load the model 
 with open('finalized_model.pkl', 'rd') as file
-    model = pikle.load(file)
+    model = pickle.load(file)
 
 # Streamlit app starts here
 st.title('Email Spam Classification')
