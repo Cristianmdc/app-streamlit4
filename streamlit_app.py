@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
-from nlp.pkl import preprocess_and_predict  # Ensure to replace 'your_script_name' with the actual name of your script file
+# Import necessary functions from your utility script or define them directly in this script
+from model_utils import preprocess_and_predict  
 
 # Load your trained model
 @st.cache(allow_output_mutation=True)
@@ -18,8 +19,8 @@ st.title("Spam/Ham Classification App")
 user_input = st.text_area("Enter the text you want to classify:", "Type Here")
 
 if st.button("Classify"):
-    # Preprocess and predict the class of user input
-    result = preprocess_and_predict(user_input, model)  # Adjust this if your preprocess_and_predict function doesn't use the model as input
+    # Predict the class of user input
+    result = preprocess_and_predict(user_input, model)  # Adjust according to your function's definition
     if result == 1:
         st.write("The text is classified as: Spam")
     else:
