@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle
-# Import necessary functions from your utility script or define them directly in this script
-from model_utils import preprocess_and_predict  
+  
 
 # Load your trained model
 @st.cache(allow_output_mutation=True)
