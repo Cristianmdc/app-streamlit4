@@ -9,6 +9,11 @@ def load_model():
     return model
 
 model = load_model()
+# Modify this function to accept the model as an argument
+def preprocess_and_predict(input_text, model):
+    cleaned_text = clean_and_lemmatize(input_text)
+    prediction = model.predict([cleaned_text])
+    return prediction[0]
 
 # Setting title
 st.title("Spam/Ham Classification App")
