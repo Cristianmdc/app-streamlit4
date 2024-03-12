@@ -1,15 +1,4 @@
 import streamlit as st
-import requests
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
-import re
-import nltk
-from nltk.stem import WordNetLemmatizer
-import zipfile
-import os
 import pickle
 #load the model 
 with open('finalized_model.pkl', 'rd') as file:
