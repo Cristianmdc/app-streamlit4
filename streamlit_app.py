@@ -4,7 +4,7 @@ import pickle
 import pickle
 
 with open('nlp.pkl','rb') as file:
-  model = pickle.load(model, file)
+  model = pickle.load(file)
     
 # Streamlit app starts here
 st.title('Email Spam Classification')
